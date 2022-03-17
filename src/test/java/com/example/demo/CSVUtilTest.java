@@ -35,7 +35,6 @@ public class CSVUtilTest {
         assert listFilter.size() == 322;
     }
 
-
     @Test
     void reactive_filtrarJugadoresMayoresA35(){
         List<Player> list = CsvUtilFile.getPlayers();
@@ -55,6 +54,47 @@ public class CSVUtilTest {
                 .collectMultimap(Player::getClub);
 
         assert listFilter.block().size() == 322;
+    }
+
+
+    @Test
+    void reactive_filtrarJugadoresPorClubMayoresA34(){
+        List<Player> list = CsvUtilFile.getPlayers();
+        Flux<Player> listFlux = Flux.fromStream(list.parallelStream()).cache();
+        Mono<Map<String, Collection<Player>>> listFilter = listFlux
+                .filter(player -> player.age >= 34)
+                .filter(player -> player.club.equals("Paris Saint-Germain"))
+                .distinct()
+                .collectMultimap(Player::getClub);
+        
+        System.out.println("Equipo: ");
+        listFilter.block().forEach((equipo, players) -> {
+            System.out.println(equipo);
+            players.forEach(player -> {
+                System.out.println("[Nombre: " + player.name + "] [" + "Edad: " + player.age + " años]");
+                assert player.club.equals("Paris Saint-Germain");
+                assert player.age >= 34;
+            });
+        });
+    }
+
+
+    @Test
+    void reactive_filtrarRankingJugadoresPorNacionalidad() {
+        List<Player> list = CsvUtilFile.getPlayers();
+        Flux<Player> listFlux = Flux.fromStream(list.parallelStream()).cache();
+        Mono<Map<String, Collection<Player>>> listFilter = listFlux
+                .distinct()
+                .sort((a, player) -> player.winners)
+                .collectMultimap(Player::getNational);
+        
+        System.out.println("Equipo: ");
+        listFilter.block().forEach((equipo, players) -> {
+            System.out.println(equipo);
+            players.forEach(player -> {
+                System.out.println("[Nombre: " + player.name + "] [" + "Edad: " + player.age + " años] | [Victorias: " + player.winners + "]");
+            });
+        });
     }
 
 
