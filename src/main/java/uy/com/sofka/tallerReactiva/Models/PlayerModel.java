@@ -1,4 +1,4 @@
-package uy.com.sofka.Models;
+package uy.com.sofka.tallerReactiva.Models;
 
 import javax.persistence.Id;
 

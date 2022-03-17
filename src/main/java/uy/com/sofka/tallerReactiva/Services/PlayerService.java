@@ -1,4 +1,4 @@
-package uy.com.sofka.Services;
+package uy.com.sofka.tallerReactiva.Services;
 
 import java.util.Comparator;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Flux;
-import uy.com.sofka.Models.PlayerModel;
-import uy.com.sofka.Repositories.PlayerRepository;
+import uy.com.sofka.tallerReactiva.Models.PlayerModel;
+import uy.com.sofka.tallerReactiva.Repositories.PlayerRepository;
 
 @Service
 public class PlayerService {

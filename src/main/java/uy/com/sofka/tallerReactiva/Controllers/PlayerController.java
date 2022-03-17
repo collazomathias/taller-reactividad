@@ -1,7 +1,8 @@
-package uy.com.sofka.Controllers;
+package uy.com.sofka.tallerReactiva.Controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
-import uy.com.sofka.Models.PlayerModel;
-import uy.com.sofka.Services.PlayerService;
+import uy.com.sofka.tallerReactiva.Models.PlayerModel;
+import uy.com.sofka.tallerReactiva.Services.PlayerService;
 
 @RestController
 @CrossOrigin("*")
@@ -18,6 +19,11 @@ import uy.com.sofka.Services.PlayerService;
 public class PlayerController {
     
     PlayerService playerService;
+
+    @Autowired
+    public PlayerController(PlayerService playerService){
+        this.playerService = playerService;
+    }
 
     @GetMapping(value = "/players")
     public Flux<PlayerModel> getPlayers() {

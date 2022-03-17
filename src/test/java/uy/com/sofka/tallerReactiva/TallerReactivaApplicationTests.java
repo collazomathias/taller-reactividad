@@ -1,10 +1,10 @@
-package uy.com.sofka;
+package uy.com.sofka.tallerReactiva;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class TallerReactivaApplicationTests {
 
 	@Test
 	void contextLoads() {
