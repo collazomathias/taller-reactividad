@@ -18,12 +18,9 @@ import com.example.demo.Services.PlayerService;
 @RequestMapping("/api")
 public class PlayerController {
     
-    PlayerService playerService;
 
     @Autowired
-    public PlayerController(PlayerService playerService){
-        this.playerService = playerService;
-    }
+    PlayerService playerService;
 
     @GetMapping(value = "/players")
     public Flux<PlayerModel> getPlayers() {
